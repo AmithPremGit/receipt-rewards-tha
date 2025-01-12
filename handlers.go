@@ -56,6 +56,9 @@ func (h *Handlers) ProcessReceipt(w http.ResponseWriter, r *http.Request) {
 	h.points[id] = points
 	h.mutex.Unlock()
 
+	// Set status code to 200
+	w.WriteHeader(http.StatusOK)
+
 	// Return response
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(ProcessResponse{ID: id})
@@ -75,6 +78,10 @@ func (h *Handlers) GetPoints(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Set status code to 200
+	w.WriteHeader(http.StatusOK)
+
+	// Return response
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(PointsResponse{Points: points})
 }
